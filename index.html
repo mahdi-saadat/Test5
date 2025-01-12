@@ -194,35 +194,13 @@
                     aspectRatio: 1.5,
                     scales: {
                         x: {
-                            title: {
-                                display: true,
-                                text: "σ3 (MPa)",
-                                font: {
-                                    size: 14,
-                                    weight: "bold"
-                                }
-                            },
-                            ticks: {
-                                // Format tick labels to show only integers
-                                callback: function(value) {
-                                    return Math.round(value); // Rounds values to the nearest integer for display
-                                },
-                                font: { size: 12 }
-                            },
+                            title: { display: true, text: "σ3 (MPa)", font: { size: 14, weight: "bold" } },
+                            ticks: { autoSkip: true, maxTicksLimit: 15, font: { size: 12 } },
                             grid: { color: "#e0e0e0" }
                         },
                         y: {
-                            title: {
-                                display: true,
-                                text: "σ1 (MPa)",
-                                font: {
-                                    size: 14,
-                                    weight: "bold"
-                                }
-                            },
-                            ticks: {
-                                font: { size: 12 }
-                            },
+                            title: { display: true, text: "σ1 (MPa)", font: { size: 14, weight: "bold" } },
+                            ticks: { font: { size: 12 } },
                             grid: { color: "#e0e0e0" }
                         }
                     },
