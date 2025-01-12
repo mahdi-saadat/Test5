@@ -203,12 +203,9 @@
                                 }
                             },
                             ticks: {
-                                // Show only integers on the x-axis
+                                // Format tick labels to show only integers
                                 callback: function(value) {
-                                    if (value % 1 === 0) {
-                                        return value; // Display only whole numbers
-                                    }
-                                    return ""; // Do not display decimals
+                                    return Math.round(value); // Rounds values to the nearest integer for display
                                 },
                                 font: { size: 12 }
                             },
