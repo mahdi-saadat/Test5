@@ -108,7 +108,8 @@
 
         // Function to calculate sigma3 (overburden pressure)
         function calculateSigma3(density, depth) {
-            return density * depth;
+            //return density * depth;
+            return Math.round(density * depth);
         }
 
         // Function to calculate tensile strength (sigt)
@@ -196,13 +197,7 @@
                         x: {
                             title: { display: true, text: "σ3 (MPa)", font: { size: 14, weight: "bold" } },
                             //ticks: { autoSkip: true, maxTicksLimit: 15, font: { size: 12 } },
-                            //ticks: { font: { size: 12 } },
-                            ticks: {
-                                font: { size: 12 },
-                                callback: function (value, index, values) {
-                                    return Number.isInteger(value) ? value : ''; // Show only integers, hide others
-                                }
-                            },
+                            ticks: { font: { size: 12 } },
                             grid: { color: "#e0e0e0" }
                         },
                         y: {
