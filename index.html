@@ -56,7 +56,7 @@
             const sigma_t = -s * (ucsi / mb)
 
 
-            for (let sigma3 = sigma_t; sigma3 <= sigma3Max; sigma3 += sigma3Max / 50) {
+            for (let sigma3 = sigma_t; sigma3 <= sigma3Max; sigma3 += sigma3Max / 1000) {
                 const sigma1 = sigma3 + ucsi * (mb * (sigma3 / ucsi) + s) ** a;
                 sigma3Values.push(sigma3);
                 sigma1Values.push(sigma1);
