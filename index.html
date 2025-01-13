@@ -3,36 +3,128 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hoek-Brown Strength Plot</title>
+    <title>Hoek-Brown Failure Criterion</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f4f4f9;
+        }
+
+        h1 {
+            margin-top: 30px;
+            font-size: 2em;
+            color: #333;
+        }
+
+        #calculatorForm {
+            margin: 20px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        table {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        .chart-container {
+            width: 100%;
+            max-width: 500px;
+            margin-top: 30px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #hoekBrownChart {
+            width: 100% !important;
+            height: auto;
+            max-width: 400px;
+            max-height: 400px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Hoek-Brown Strength Plot</h1>
+    <h1>Hoek-Brown Failure Criterion</h1>
     <form id="calculatorForm">
-        <label for="ucsi">UCSi (MPa):</label>
-        <input type="number" id="ucsi" name="ucsi" step="0.1" value="75.0" required><br><br>
-
-        <label for="gsi">GSI:</label>
-        <input type="number" id="gsi" name="gsi" step="0.1" value="50.0" required><br><br>
-
-        <label for="mi">mi:</label>
-        <input type="number" id="mi" name="mi" step="0.1" value="10.0" required><br><br>
-
-        <label for="depth">Depth (m):</label>
-        <input type="number" id="depth" name="depth" step="0.1" value="200.0" required><br><br>
-
-        <label for="density">Density (MN/m³):</label>
-        <input type="number" id="density" name="density" step="0.001" value="0.024" required><br><br>
-
-        <label for="disturbance">Disturbance Factor (D):</label>
-        <input type="number" id="disturbance" name="disturbance" step="0.1" value="0.0" required><br><br>
-
+        <table>
+            <tr>
+                <td><label for="ucsi">UCSi (MPa):</label></td>
+                <td><input type="number" id="ucsi" name="ucsi" step="0.1" value="75.0" required></td>
+            </tr>
+            <tr>
+                <td><label for="gsi">GSI:</label></td>
+                <td><input type="number" id="gsi" name="gsi" step="0.1" value="50.0" required></td>
+            </tr>
+            <tr>
+                <td><label for="mi">mi:</label></td>
+                <td><input type="number" id="mi" name="mi" step="0.1" value="10.0" required></td>
+            </tr>
+            <tr>
+                <td><label for="depth">Depth (m):</label></td>
+                <td><input type="number" id="depth" name="depth" step="0.1" value="200.0" required></td>
+            </tr>
+            <tr>
+                <td><label for="density">Density (MN/m³):</label></td>
+                <td><input type="number" id="density" name="density" step="0.001" value="0.024" required></td>
+            </tr>
+            <tr>
+                <td><label for="disturbance">Disturbance Factor (D):</label></td>
+                <td><input type="number" id="disturbance" name="disturbance" step="0.1" value="0.0" required></td>
+            </tr>
+        </table>
         <button type="submit">Generate Plot</button>
     </form>
 
-    <h2>Results:</h2>
-    <canvas id="hoekBrownChart" width="800" height="400"></canvas>
-    <p id="results"></p>
+    <div class="chart-container">
+        <h2>Results:</h2>
+        <canvas id="hoekBrownChart"></canvas>
+    </div>
 
     <script>
         document.getElementById('calculatorForm').addEventListener('submit', function(event) {
@@ -54,7 +146,6 @@
             const s = Math.exp((gsi - 100) / 9 - 3 * disturbance);
             const a = 0.5 + 1 / 6 * (Math.exp(-gsi / 15) - Math.exp(-20 / 3));
             const sigma_t = -s * (ucsi / mb)
-
 
             for (let sigma3 = sigma_t; sigma3 <= sigma3Max; sigma3 += sigma3Max / 1000) {
                 const sigma1 = sigma3 + ucsi * (mb * (sigma3 / ucsi) + s) ** a;
