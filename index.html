@@ -164,10 +164,10 @@
             const sigt = calculateTensileStrength(UCSi, mb, s);
 
             // Generate sigma3 values
-            const sig3Values = generateSigma3Values(sigt, 1.0, sigma_3, 500);
+            const sig3Values = generateSigma3Values(sigt, 1.2, sigma_3, 500);
 
             // Simplify the x-axis data points for better rendering
-            const reducedSig3Values = reduceData(sig3Values, 10);
+            const reducedSig3Values = reduceData(sig3Values, 100);
 
             // Calculate sig1 values
             const sig1HB = reducedSig3Values.map(sig3 => hoekBrown(sig3, UCSi, mb, s, a));
