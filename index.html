@@ -164,7 +164,7 @@
             const sigt = calculateTensileStrength(UCSi, mb, s);
 
             // Generate sigma3 values
-            const sig3Values = generateSigma3Values(sigt, 1.2, sigma_3, 500);
+            const sig3Values = generateSigma3Values(sigt, 1.2, sigma_3, 5000);
 
             // Simplify the x-axis data points for better rendering
             const reducedSig3Values = reduceData(sig3Values, 100);
